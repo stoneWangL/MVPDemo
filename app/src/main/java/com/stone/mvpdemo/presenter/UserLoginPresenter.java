@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import com.stone.mvpdemo.IUserLoginView;
 import com.stone.mvpdemo.MainActivity;
 import com.stone.mvpdemo.bean.User;
 import com.stone.mvpdemo.net.UserLoginNet;
@@ -12,9 +13,12 @@ import com.stone.mvpdemo.net.UserLoginNet;
  * 业务相关
  */
 public class UserLoginPresenter {
-    private MainActivity view;
 
-    public UserLoginPresenter(MainActivity view){
+    //Activity 和 Fragment 通用性不好
+    //提高通用性：放置参数为通用（抽象类或接口，实际开发中接口更通用）
+    private IUserLoginView view;
+
+    public UserLoginPresenter(IUserLoginView view){
         this.view = view;
     }
 

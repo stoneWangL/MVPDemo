@@ -10,13 +10,13 @@ import android.widget.Toast;
 import com.stone.mvpdemo.bean.User;
 import com.stone.mvpdemo.presenter.UserLoginPresenter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IUserLoginView{
 
     private EditText mUsername;
     private EditText mPassword;
     private ProgressDialog dialog;
 
-    private UserLoginPresenter presenter = new UserLoginPresenter(this);
+    private UserLoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
         mUsername = findViewById(R.id.username);
         mPassword = findViewById(R.id.password);
+
+        dialog = new ProgressDialog(this);
+        presenter = new UserLoginPresenter(this);
     }
 
     //按钮点击
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         boolean userInfo = presenter.checkUserInfo(user);
 
         if (userInfo){
-            dialog = new ProgressDialog(this);
+
             dialog.show();
             presenter.login(user);
         }else{
